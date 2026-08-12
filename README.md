@@ -62,5 +62,5 @@
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=tomorrow505/auto_feed_js&type=Date)](https://star-history.com/#tomorrow505/auto_feed_js&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=tomorrow505/auto_feed_js&type=Date)](https://star-history.dera.page/#tomorrow505/auto_feed_js&type=date)
 
