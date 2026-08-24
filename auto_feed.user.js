@@ -102,7 +102,7 @@
 // @require      https://greasyfork.org/scripts/444988-music-helper/code/music-helper.js?version=1268106
 // @icon         https://kp.m-team.cc//favicon.ico
 // @run-at       document-end
-// @version      2.1.1.2
+// @version      2.1.1.3
 // @grant        GM_xmlhttpRequest
 // @grant        GM_setClipboard
 // @grant        GM_setValue
@@ -6887,7 +6887,9 @@ if (site_url.match(/^https:\/\/.*?usercp.php\?action=personal(#setting|#ptgen|#m
         $('#signin').append(`<input type="button" id="ksave_setting" value="保存脚本设置！&nbsp;(只需点击一次)">`);
         $('#signin').append(`&nbsp;&nbsp;<font color="green">说明：红色表示获取到魔力，橙色表示登录成功，蓝色表示登录失败，黑色表示暂不支持或无响应。</font>`);
         if (site_url.match(/springsunday/)) {
-            $('#ksave_setting').css({'color': 'white', 'background' :'url(https://springsunday.net/styles/Maya/images/btn_submit_bg.gif) repeat left top', 'border': '1px black'});
+            setTimeout(function() {
+                $('#ksave_setting').css({'color': 'blue', 'background' :'url(https://springsunday.net/styles/Maya/images/btn_submit_bg.gif) repeat left top', 'border': '1px black'});
+            }, 1000);
         }
         $('#ksave_setting').click((e)=>{
             used_signin_sites = [];
@@ -7390,6 +7392,7 @@ if (site_url.match(/^https:\/\/.*?usercp.php\?action=personal(#setting|#ptgen|#m
             $('#setting').append(`<label><b>${key}对应apikey(<a href="${used_rehost_img_info[key].url}" target="_blank"><font color="red">登录站点</font></a>即可获取):</b></label><input type="text" name="${key}_key" style="width: 300px; margin-left:5px" value=${used_rehost_img_info[key]['api-key']}><br><br>`);
         }
         $('#setting').append(`<label><b>TorrentLeech的rsskey(<a href="https://wiki.torrentleech.org/doku.php/rss_-_how_to_automatically_download_torrents_with_utorrent" target="_blank"><font color="red">依照教程</font></a>进行设置):</b></label><input type="text" name="tl_rss_key" style="width: 300px; margin-left:5px" value=${used_tl_rss_key}><br><br>`);
+        $('#setting').append(`<label><b>豆影apikey(<a href="https://doubaninfo.com/" target="_blank"><font color="red">依照教程</font></a>进行设置):</b></label><input type="text" name="douban_key" style="width: 300px; margin-left:5px" value=${douban_key}><br><br>`);
         $('label').css({"width": "280px", "text-align": "right", "display": "inline-block"});
 
         //**************************************************** 3.2 *************************************************************************
@@ -7490,6 +7493,7 @@ if (site_url.match(/^https:\/\/.*?usercp.php\?action=personal(#setting|#ptgen|#m
             GM_setValue('used_ptp_img_key', $(`input[name="ptp_img_key"]`).val());
             GM_setValue('used_tmdb_key', $(`input[name="tmdb_key"]`).val());
             GM_setValue('used_tl_rss_key', $(`input[name="tl_rss_key"]`).val());
+            GM_setValue('douban_key', $(`input[name="douban_key"]`).val());
 
             //处理匿名
             if_uplver = $(`input[name="anonymous"]:last`).prop('checked') ? 1: 0;
@@ -7521,6 +7525,11 @@ if (site_url.match(/^https:\/\/.*?usercp.php\?action=personal(#setting|#ptgen|#m
 
             alert('保存成功！！！')
         });
+        if (site_url.match(/springsunday/)) {
+            setTimeout(function() {
+                $('#save_setting').css({'color': 'blue', 'background' :'url(https://springsunday.net/styles/Maya/images/btn_submit_bg.gif) repeat left top', 'border': '1px black'});
+            }, 1000);
+        }
 
         //自制ptgen
         $table.append(`<tr style="display:none;"><td width="1%" class="rowhead nowrap" valign="top" align="right">PTGen</td><td width="99%" class="rowfollow" valign="top" align="left" id="ptgen"></td></tr>`);
